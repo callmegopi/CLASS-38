@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.css">
+    <style>
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            border: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col">
+                <form>
+                    <div class="mob-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+
+                    <div class="mob-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName">
+                    </div>
+
+                    <div class="mob-3">
+                        <label for="lastName" class="form-label">last Name</label>
+                        <input type="text" class="form-control" id="lastName">
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="creatPerson()">Submit</button>
+                </form>
+            </div>
+
+            <div class="col">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>EMAIL ADDRESS</th>
+                            <th>FIRST NAME</th>
+                            <th>LAST NAME</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var person = {
+            email: "",
+            firstName: "",
+            lastName: "",
+        }
+
+        var users = [];
+
+        function creatPerson() {
+            for (a in person) {
+                person[a] = document.getElementById(a).value;
+            }
+            users.push({...person});
+
+            clear();
+            displayPersons();
+        }
+
+        function clear() {
+            for (a in person) {
+                document.getElementById(a).value = "";
+            }
+        }
+
+        function displayPersons() {
+            document.querySelector("tbody").innerHTML = "";
+            users.forEach((person) => {
+                var myTr = document.createElement("tr");
+                for (a in person) {
+                    var myTd = document.createElement("td");
+                    myTd.innerHTML = person[a]
+                    myTr.appendChild(myTd);
+                }
+                document.querySelector("tbody").appendChild(myTr);
+            })
+        }
+    </script>
+</body>
+
+</html>
